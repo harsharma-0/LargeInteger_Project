@@ -146,3 +146,8 @@ bool operator>=(const LargeInt &a, const LargeInt &b){
 bool operator<=(const LargeInt &a, const LargeInt &b){
     return !(a>b);
 }
+
+LargeInt &LargeInt::operator=(const LargeInt&a){
+    digits = a.digits;
+    return *this;
+}
