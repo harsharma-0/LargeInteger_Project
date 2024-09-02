@@ -73,3 +73,36 @@ public:
     friend LargeInt NthFibonacci(int n);
     friend LargeInt Factorial(int n);
 };
+
+LargeInt::LargeInt(string & s){
+    digits = "";
+    int n = s.size();
+    for(int i = n-1;i>=0; i--){
+        if(!isdigit(s[i])) throw("ERROR");
+        digits.push_back(s[i]-'0');
+    }
+}
+
+LargeInt::LargeInt(unsigned long long nr){
+    do{
+        digits.push_back(nr%10);
+        nr/=10;
+    }while(nr);
+}
+
+LargeInt::LargeInt(const char *s){
+    digits="";
+    for(int i = strlen(s) -1; i>=0; i--){
+        if(!isdigit(s[i])) throw("ERROR");
+        digits.push_back(s[i] - '0');
+    }
+}
+
+LargeInt::LargeInt(LargeInt & a){
+    digits = a.digits;
+}
+
+bool Null(const LargeInt& a){
+    iF(a.digits.size() == 1 && a.digitd[0] == 0) return true;
+    return false;
+}
