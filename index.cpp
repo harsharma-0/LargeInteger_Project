@@ -187,7 +187,7 @@ LargeInt &LargeInt::operator--(){
     return *this;
 }
 
-LargeInt LargeInt::opertaor--(int temp){
+LargeInt LargeInt::operator--(int temp){
     LargeInt aux;
     aux = *this;
     --(*this);
