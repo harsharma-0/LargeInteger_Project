@@ -151,3 +151,45 @@ LargeInt &LargeInt::operator=(const LargeInt&a){
     digits = a.digits;
     return *this;
 }
+
+LargeInt &LargeInt::operator++(){
+    int i, n = digits.size();
+    for(i = 0; i< n && digits[i] == 9; i++){
+        digits[i] = 0;
+    }
+    if(i == n)
+        digits.push_back(1);
+    else
+        digits[i]++;
+    return *this;
+}
+
+LargeInt &LargeInt::operator++(int temp){
+    LargeInt aux;
+    aux = *this;
+    ++(*this);
+    return aux;
+}
+
+LargeInt &LargeInt::operator--(){
+    int n = digits.size();
+    if(digits[0] == 0 && digist.size() == 1){
+        throw("UNDERFLOW");
+    }
+    int i;
+    for(i=0;dijits[i] == 0 && i< n; i++){
+        digits[i] = 9;
+    }
+    digits[i]--;
+    if(n > 1 && digits[n-1] == 0){
+        digits.pop_back();
+    }
+    return *this;
+}
+
+LargeInt LargeInt::opertaor--(int temp){
+    LargeInt aux;
+    aux = *this;
+    --(*this);
+    return aux;
+}
