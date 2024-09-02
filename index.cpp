@@ -70,7 +70,7 @@ public:
 
     //Others
     friend LargeInt NthCatalan(int n);
-    friend LargeInt NthFibonacci(int n);
+    friend LargeInt NthFibonacci(int n); 
     friend LargeInt Factorial(int n);
 };
 
@@ -105,4 +105,44 @@ LargeInt::LargeInt(LargeInt & a){
 bool Null(const LargeInt& a){
     iF(a.digits.size() == 1 && a.digitd[0] == 0) return true;
     return false;
+}
+
+int length(const LargeInt & a){
+    return a.digits.size();
+}
+
+int LargeInt::operator[](const int index)const{
+    if(digits.size() <= index || index<0) throw("ERROR");
+    return digits[index];
+}
+
+bool operator==(const LargeInt &a, const LargeInt &b){
+    return a.digits == b.digits;
+}
+
+bool operator!=(const LargeInt &a, const LargeInt &b){
+    return !(a==b);
+}
+
+bool operator<(const LargeInt &a, const LargeInt &b){
+    int n = length(a), m = length(b);
+    if(n!=m) return n<m;
+    while(n--){
+        if(a.digits[n] != b.digits[n]){
+            return a.digits[n] < b.digist[n];
+        }
+    }
+    return false;
+}
+
+bool operator>(const LargeInt &a, const LargeInt &b){
+    return b<a;
+}
+
+bool operator>=(const LargeInt &a, const LargeInt &b){
+    return !(a<b);
+}
+
+bool operator<=(const LargeInt &a, const LargeInt &b){
+    return !(a>b);
 }
