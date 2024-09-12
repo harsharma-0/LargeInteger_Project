@@ -265,3 +265,37 @@ LargeInt operator+(const LargeInt &a, LargeInt &b)
     temp += b;
     return temp;
 }
+
+LargeInt &operator-=(LargeInt &a, const LargeInt &b){
+    if(a < b){
+        throw("UNDERFLOW");
+    }
+    int n = length(a), m = length(b);
+    int i, t = 0, s;
+    for(i = 0; i< n;i++){
+        if(i<m){
+            s = a.digits[i] - b.digits[i] + t;
+        }else{
+            s = a.digits[i] + t;
+        }
+        if(s < 0){
+            s += 10;
+            t = -1;
+        }else{
+            t = 0;
+            a.digits[i] = s;
+        }
+    }
+    while(n > 1 && a.digits[n-1] == 0){
+        a.digits.pop_back();
+        n--;
+    }
+    return a;
+}
+
+LargeInt operator-(const LargeInt &a, LargeInt &b){
+    LargeInt temp;
+    temp = a;
+    temp -= b;
+    return temp;
+}
