@@ -352,3 +352,89 @@ LargeInt operator*(const LargeInt &a, const LargeInt &b)
     return temp;
 }
 
+LargeInt &operator/=(LargeInt &a, const LargeInt &b)
+{
+    if (Null(b))
+    {
+        throw("Arithmatic Error: Division by 0");
+    }
+    if (a < b)
+    {
+        a = LargeInt();
+        return a;
+    }
+    if (a == b)
+    {
+        a = LargeInt(1);
+        return a;
+    }
+    int i, lgcat = 0, cc;
+    int n = length(a), m = length(b);
+    vector<int> cat(n, 0);
+    LargeInt t;
+    for (i = n - 1; t * 10 + a.digits[i] < b; i--)
+    {
+        t *= 10;
+        t += a.digits[i];
+    }
+    for (; i >= 0; i--)
+    {
+        t = t * 10 + a.digits[i];
+        for (cc = 9; cc * b > t; cc--)
+            ;
+        t -= cc * b;
+        cat[lgcat++] = cc;
+    }
+    a.digits.resize(cat.size());
+    for (i = 0; i < lgcat; i++)
+    {
+        a.digits[i] = cat[lgcat - i - 1];
+    }
+    a.digits.resize(lgcat);
+    return a;
+}
+
+LargeInt operator/(const LargeInt &a, const LargeInt &b)
+{
+    LargeInt temp;
+    temp = a;
+    temp /= b;
+    return temp;
+}
+
+LargeInt &operator%=(LargeInt& a, const LargeInt &b){
+    if(Null(b)){
+        throw("Arithmetic Error: Division by 0");
+    }
+    if(a < b){
+        return a;
+    }
+    if(a == b){
+        a = LargeInt();
+        return a;
+    }
+
+    int i, lgcat = 0, cc;
+    int n = length(a), m = length(b);
+    vector<int> cat(n, 0);
+    LargeInt t;
+    for(i = n-1; t * 10 + a.digits[i] < b; i--){
+        t *= 10;
+        t += a.digits[i];
+    }
+    for(; i >= 0; i--){
+        t = t * 10 + a.digits[i];
+        for(cc = 9; cc * b > t; cc--);
+        t -= cc*b;
+        cat[lgcat++] = cc;
+    }
+    a = t;
+    return a;
+}
+
+LargeInt operator%(const LargeInt &a, const LargeInt &b){
+    LargeInt temp;
+    temp = a;
+    temp %= b;
+    return temp;
+}
